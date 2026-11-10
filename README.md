@@ -114,46 +114,93 @@ This project uses **Retrieval-Augmented Generation (RAG)** to improve answer acc
 
 ## ⚙️ Installation & Setup
 
+This project is developed and executed using **Google Colab**.
+
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/CodingwithFawad//Rag-Project-For-Stepx-Footwear-Brand
-.git
+git clone https://github.com/CodingwithFawad/Rag-Project-For-Stepx-Footwear-Brand.git
 ```
 
-### 2. Navigate to the Project
+Navigate to the project directory:
 
 ```bash
 cd Rag-Project-For-Stepx-Footwear-Brand
 ```
 
-### 3. Create a Virtual Environment
+### 2. Open Google Colab
 
-```bash
-python -m venv venv
+Open the project notebook using Google Colab.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/)
+
+### 3. Install Required Libraries
+
+Run the following command inside a Google Colab notebook cell:
+
+```python
+!pip install -q chromadb sentence-transformers pypdf ollama gradio
 ```
 
-Activate it on Windows:
+### 4. Install Ollama
 
-```bash
-venv\Scripts\activate
+Install Ollama using the following command:
+
+```python
+!curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-### 4. Install Dependencies
+Check Ollama installation:
 
-```bash
-pip install -r requirements.txt
+```python
+!ollama --version
 ```
 
-### 8. Run the Project
+### 5. Start Ollama Server
 
-For a Gradio application:
+Start the Ollama server using Python:
 
+```python
+import subprocess
+import time
+
+# Start Ollama server in the background
+ollama_process = subprocess.Popen(
+    ["ollama", "serve"],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL
+)
+
+# Wait for the server to initialize
+time.sleep(5)
+
+print("Ollama server started!")
 ```
 
-If you are using Google Colab, run the notebook cells in the correct order and launch the Gradio interface from the notebook.
+### 6. Download the Language Model
 
----
+Download the Llama 3.2 model:
+
+```python
+!ollama pull llama3.2
+```
+
+Make sure the downloaded model matches the model configured in the notebook.
+
+### 7. Run the Notebook
+
+Execute all notebook cells in their correct order.
+
+The notebook handles the following processes:
+
+- PDF Document Loading
+- Text Extraction and Processing
+- Text Chunking
+- Embedding Generation
+- ChromaDB Vector Database Storage
+- Semantic Document Retrieval
+- LLM Response Generation using Ollama
+- Gradio Chatbot Interface
 
 ## 📚 Knowledge Base
 
